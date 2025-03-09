@@ -14,6 +14,7 @@ function App() {
 	let isLoad = false
 
 	let container: HTMLElement | undefined
+	let profile: HTMLImageElement | undefined
 	const [image, setImage] = createSignal('')
 
 	function createImage() {
@@ -35,19 +36,6 @@ function App() {
 			defer: true
 		})
 	)
-
-	onMount(() => {
-		window.addEventListener(
-			'load',
-			() => {
-				isLoad = true
-				createImage()
-			},
-			{
-				once: true
-			}
-		)
-	})
 
 	return (
 		<main class="flex flex-col justify-center items-center gap-7 h-screen px-1 md:px-0">
@@ -73,10 +61,15 @@ function App() {
 						class="w-16 h-16 rounded-full"
 						src="/profile.webp"
 						alt="Nattapon Kub"
+						ref={profile}
+						onLoad={() => {
+							isLoad = true
+							createImage()
+						}}
 					/>
 					<div class="flex flex-col gap-1.5 text-3xl max-w-md md:max-w-xl bg-comment rounded-4xl px-6 py-3 whitespace-pre-wrap transition-all duration-300">
 						<h3 class="font-medium">Nattapon Kub</h3>
-						<p class="text-ellipsis overflow-hidden">{value()}</p>
+						<p class="text-ellipsis overflow-hidden leading-9">{value()}</p>
 					</div>
 				</article>
 			</section>
