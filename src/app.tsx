@@ -96,7 +96,7 @@ function App() {
 					href={image()}
 					tabIndex={1}
 					class="flex justify-center items-center gap-3 text-xl min-w-20 min-h-20 p-2 rounded-xl bg-gray-100 interact:bg-blue-100/75 interact:text-blue-500 cursor-pointer transition-colors"
-					download={`${value()}.png`}
+					download={`${value().replace(/\n/g, ' ')}.png`}
 					title="โหลดรูปธูป"
 					aria-label="กดเพื่อโหลดรูปธูป"
 				>
