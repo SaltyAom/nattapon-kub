@@ -69,14 +69,14 @@ function App() {
 					/>
 					<div class="flex flex-col gap-1.5 text-3xl max-w-md md:max-w-xl bg-comment rounded-4xl px-6 py-3 whitespace-pre-wrap transition-all duration-300">
 						<h3 class="font-medium">Nattapon Kub</h3>
-						<p class="text-ellipsis overflow-hidden leading-9">{value()}</p>
+						<p class="text-ellipsis overflow-hidden leading-10">{value()}</p>
 					</div>
 				</article>
 			</section>
 
 			<form class="flex flex-col sm:flex-row justify-center w-full gap-2">
 				<textarea
-					class="appearance-none text-lg w-full sm:max-w-xs p-3 bg-gray-100 rounded-xl resize-none outline-none"
+					class="appearance-none text-lg w-full sm:max-w-xs min-h-26 p-3 bg-gray-100 rounded-xl resize-none outline-none"
 					use:model={[value, setValue]}
 					autofocus
 					autocomplete="off"
@@ -88,7 +88,7 @@ function App() {
 				<a
 					href={image()}
 					tabIndex={1}
-					class="flex justify-center items-center gap-3 text-xl min-w-20 min-h-20 p-2 rounded-xl bg-gray-100 interact:bg-blue-100/75 interact:text-blue-500 cursor-pointer transition-colors"
+					class="flex justify-center items-center gap-3 text-xl min-w-26 min-h-26 p-2 rounded-xl bg-gray-100 interact:bg-blue-100/75 interact:text-blue-500 cursor-pointer transition-colors"
 					download={`${value().replace(/\n/g, ' ')}.png`}
 					title="โหลดรูปธูป"
 					aria-label="กดเพื่อโหลดรูปธูป"
