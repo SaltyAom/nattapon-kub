@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from 'solid-js'
+import { createSignal, createEffect, on, onMount } from 'solid-js'
 // @ts-expect-error h is used in build step
 import h from 'solid-js/h'
 
@@ -11,15 +11,13 @@ import DownloadIcon from './icons/download'
 
 function App() {
 	const [value, setValue] = createSignal('ตัดต่อ 👎')
+	let isLoad = false
 
 	let container: HTMLElement | undefined
-	let result: HTMLImageElement | undefined
-	let download: HTMLAnchorElement | undefined
+	const [image, setImage] = createSignal('')
 
-	createEffect(() => {
-		value()
-
-		if (!container || !result || !download) return
+	function createImage() {
+		if (!isLoad || !container) return
 
 		Image.toSvg(container, {
 			quality: 100,
@@ -27,10 +25,26 @@ function App() {
 				width: container.clientWidth,
 				height: container.clientHeight
 			}
-		}).then((dataUrl) => {
-			result.src = dataUrl
-			download.href = dataUrl
+		}).then(setImage)
+	}
+
+	createEffect(
+		on(value, createImage, {
+			defer: true
 		})
+	)
+
+	onMount(() => {
+		window.addEventListener(
+			'load',
+			() => {
+				isLoad = true
+				createImage()
+			},
+			{
+				once: true
+			}
+		)
 	})
 
 	return (
@@ -38,9 +52,11 @@ function App() {
 			{/* <h1 class="text-3xl sm:text-4xl font-medium">ไม่พี่คืองี้</h1> */}
 
 			<section class="relative flex justify-center items-center max-w-3xl w-full min-h-96 border border-gray-300 rounded-2xl overflow-hidden">
-				<div class="absolute z-10 flex justify-center items-center w-full h-full bg-white">
+				<div
+					class={`absolute z-10 flex justify-center items-center w-full h-full bg-white ${image() ? '' : 'hidden'}`}
+				>
 					<img
-						ref={result}
+						src={image()}
 						class="object-cover"
 						alt={`Nattapon Kub ${value()}`}
 					/>
@@ -74,7 +90,7 @@ function App() {
 					aria-label="ใส่ข้อความที่จะให้ธูปพิมพ์"
 				/>
 				<a
-					ref={download}
+					href={image()}
 					tabIndex={1}
 					class="flex justify-center items-center gap-3 text-xl min-w-20 min-h-20 p-2 rounded-xl bg-gray-100 interact:bg-blue-100/75 interact:text-blue-500 cursor-pointer transition-colors"
 					download
