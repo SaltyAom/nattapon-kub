@@ -1,4 +1,4 @@
-import { createSignal, createEffect, on, onMount } from 'solid-js'
+import { createSignal, createEffect, on } from 'solid-js'
 // @ts-expect-error h is used in build step
 import h from 'solid-js/h'
 
