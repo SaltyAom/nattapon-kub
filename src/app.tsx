@@ -19,11 +19,13 @@ function App() {
 	function createImage() {
 		if (!isLoad || !container) return
 
-		Image.toSvg(container, {
+		Image.toPng(container, {
 			quality: 100,
+			width: container.clientWidth * 3,
+			height: container.clientHeight * 3,
 			style: {
-				width: container.clientWidth,
-				height: container.clientHeight
+				transform: 'scale(3)',
+				transformOrigin: 'top left'
 			}
 		}).then(setImage)
 	}
@@ -57,8 +59,9 @@ function App() {
 				>
 					<img
 						src={image()}
-						class="object-cover"
+						class="object-contain"
 						alt={`Nattapon Kub ${value()}`}
+						style={`width:${container?.clientWidth}px; height:${container?.clientHeight}px`}
 					/>
 				</div>
 				<article
@@ -71,7 +74,7 @@ function App() {
 						src="/profile.webp"
 						alt="Nattapon Kub"
 					/>
-					<div class="flex flex-col gap-1.5 text-3xl max-w-md md:max-w-xl bg-comment rounded-3xl px-6 py-3 whitespace-pre-wrap transition-all duration-300">
+					<div class="flex flex-col gap-1.5 text-3xl max-w-md md:max-w-xl bg-comment rounded-4xl px-6 py-3 whitespace-pre-wrap transition-all duration-300">
 						<h3 class="font-medium">Nattapon Kub</h3>
 						<p class="text-ellipsis overflow-hidden">{value()}</p>
 					</div>
@@ -93,7 +96,7 @@ function App() {
 					href={image()}
 					tabIndex={1}
 					class="flex justify-center items-center gap-3 text-xl min-w-20 min-h-20 p-2 rounded-xl bg-gray-100 interact:bg-blue-100/75 interact:text-blue-500 cursor-pointer transition-colors"
-					download
+					download={`${value()}.png`}
 					title="โหลดรูปธูป"
 					aria-label="กดเพื่อโหลดรูปธูป"
 				>
