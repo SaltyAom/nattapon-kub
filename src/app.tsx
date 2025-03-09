@@ -64,12 +64,14 @@ function App() {
 						ref={profile}
 						onLoad={() => {
 							isLoad = true
-							createImage()
+							requestAnimationFrame(createImage)
 						}}
 					/>
 					<div class="flex flex-col gap-1.5 text-3xl max-w-md md:max-w-xl bg-comment rounded-4xl px-6 py-3 whitespace-pre-wrap transition-all duration-300">
 						<h3 class="font-medium">Nattapon Kub</h3>
-						<p class="text-ellipsis overflow-hidden leading-10">{value()}</p>
+						<p class="text-ellipsis overflow-hidden leading-10">
+							{value()}
+						</p>
 					</div>
 				</article>
 			</section>
