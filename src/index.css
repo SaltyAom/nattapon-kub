@@ -5,3 +5,18 @@
 }
 
 @custom-variant interact (&:hover, &:focus);
+
+#form {
+	@apply grid;
+	grid-template: "a b" auto
+				   "c c" auto;
+
+	@media (min-width: 48rem) {
+		@apply flex;
+		grid-template: unset;
+	}
+}
+
+details summary::-webkit-details-marker {
+  display:none;
+}
