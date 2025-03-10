@@ -67,7 +67,7 @@ function App() {
 						ref={profile}
 						onLoad={() => {
 							isLoad = true
-							setTimeout(createImage, 125)
+							setTimeout(createImage, 150)
 						}}
 					/>
 					<div class="flex flex-col gap-1 max-w-md md:max-w-xl bg-comment rounded-4xl px-6 py-3 whitespace-pre-wrap transition-all duration-300">
